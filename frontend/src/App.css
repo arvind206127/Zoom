@@ -1,0 +1,156 @@
+.landingPageContainer{
+    width: 100vw;
+    height: 100vh;
+    background: url("/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+html {
+  scrollbar-gutter: stable;
+}
+
+.landingPageContainer nav{
+    padding-inline: 2rem;
+    padding-block: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.landingPageContainer nav h2{
+    font-weight: 500;
+    font-size: 1.8rem;
+}
+
+.landingPageContainer nav .navList{
+    display: flex;
+    gap: 2rem;
+    cursor: pointer;
+}
+
+.landingMainContainer{
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 2rem;
+    height: 80vh;
+    align-items: center;
+}
+
+.landingMainContainer > div:nth-child(1){
+    font-size: 1.5rem;
+}
+
+.getStartedButton{
+    background: #ff9839;
+    width: fit-content;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+
+.landingMainContainer > div:nth-child(2) img{
+    height: 70vh;
+    width: auto;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    text-align: center;
+}
+
+.buttonContainer{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.buttonContainer > button{
+    height: 55px;
+    cursor: pointer;
+}
+
+.buttonContainer div{
+    display: flex;
+    gap: 10px;
+}
+
+.meetContainer{
+    display: flex;
+    padding-inline: 20px;
+    height: 80vh;
+    gap: 10vw;
+    justify-content: center;
+}
+
+.leftPanel{
+    height: 100%;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.leftPanel > h2{
+    font-size: 50px;
+    line-height: normal;
+}
+span{
+    color: #ff9839;
+}
+
+.leftPanel p{
+    color:rgb(149, 149, 149);
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+.rightPanel{
+    display: flex;
+    align-items: center;
+}
+
+.rightPanel > img{
+    width: 30vw;
+    height: auto;
+    border-radius: 20px;
+}
+
+.history-text{
+    text-align: center;
+    font-size: 20px;
+
+}
+
+.navbar{
+    height: 80px;
+    box-shadow: 4px 4px 4px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+.nabHistory{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    gap: 20px;
+}
+.nabHistory p{
+    font-size: 20px;
+}
+.nabimg img{
+    width: 200px;
+    height:70px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.historyIcon{
+    padding: 20px;
+}
