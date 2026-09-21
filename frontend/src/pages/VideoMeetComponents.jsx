@@ -102,24 +102,23 @@ export default function VideoMeetComponents() {
 
     useEffect(() => {
         if (!sessionStorage.getItem("token")) {
-            // Agar token nahi mila, to wapas Login par bhejo
+            
             routeTo("/auth");
         }
     }, []);
 
-    // 🔥 FIX: जैसे ही कनेक्ट हो, लोकल वीडियो को फिर से सेट करो
+    
     useEffect(() => {
         if (!askForUsername && localVideoRef.current && window.localStream) {
             localVideoRef.current.srcObject = window.localStream;
         }
-    }, [askForUsername, video]); // ✅ 'video' भी जोड़ दिया
+    }, [askForUsername, video]); 
 
 
 
     let gotMessageFromServer = (fromId, message) => {
         var signal = JSON.parse(message)
 
-        // 🔍 CHECK: क्या सिग्नल आ रहा है?
         console.log(`📩 Signal Received from ${fromId}`, signal.type || "ICE Candidate");
 
         if (fromId !== socketIdRef.current) {
@@ -208,9 +207,9 @@ export default function VideoMeetComponents() {
             setShowModal(true)
             setIsChatOpen(true);
             setNewMessages(0);
-            chatOpenRef.current = true; // 🔥 जैसे ही खोला, बैज हटा दिया (0 कर दिया)
+            chatOpenRef.current = true; 
         } else {
-            // अगर चैट बंद कर रहे हैं
+           
             setShowModal(false);
             setIsChatOpen(false);
             chatOpenRef.current = false;
@@ -225,7 +224,7 @@ export default function VideoMeetComponents() {
         socketRef.current = io.connect(server_url, { secure: false })
 
         socketRef.current.on("connect", () => {
-            socketRef.current.emit("join-call", url) // Fixed Room ID
+            socketRef.current.emit("join-call", url) 
             socketIdRef.current = socketRef.current.id;
         });
 
@@ -234,21 +233,19 @@ export default function VideoMeetComponents() {
         socketRef.current.on("user-left", (id) => {
             console.log(`User left: ${id}`);
 
-            // 1. Connection close aur delete karein
+            
             if (connections[id]) {
                 connections[id].close();
                 delete connections[id];
             }
 
-            // 2. Video list update karein
             setVideos((prevVideos) => {
                 const remainingVideos = prevVideos.filter((video) => video.socketId !== id);
 
-                // 🔥 LOGIC: Agar samne wala chala gaya aur ab koi nahi bacha (sirf aap ho)
-                // Note: 'videos' state mein sirf remote users hote hain.
+                
                 if (remainingVideos.length === 0) {
                     console.log("Sab chale gaye, redirection to home...");
-                    // Thoda delay taaki user ko achanak jhatka na lage
+                    
                     setTimeout(() => {
                         hendleEndCall();
                     }, 2000);
@@ -406,7 +403,7 @@ export default function VideoMeetComponents() {
         if (localVideoRef.current && localVideoRef.current.srcObject) {
             let currentStream = localVideoRef.current.srcObject;
 
-            // उसके ऑडियो ट्रैक को Enable/Disable करें
+            
             let audioTrack = currentStream.getAudioTracks()[0];
             if (audioTrack) {
                 audioTrack.enabled = newAudioState;
@@ -446,7 +443,6 @@ export default function VideoMeetComponents() {
         if (window.localStream) {
             window.localStream.getTracks().forEach(track => track.stop());
         }
-
 
         setTimeout(() => {
             getUserMedia();
@@ -489,18 +485,18 @@ export default function VideoMeetComponents() {
 
     let hendleEndCall = () => {
         try {
-            // 1. Local tracks stop karein
+            
             if (window.localStream) {
                 window.localStream.getTracks().forEach(track => track.stop());
             }
 
-            // 2. Saare Peer Connections close karein
+            
             for (let id in connections) {
                 connections[id].close();
                 delete connections[id];
             }
 
-            // 3. Socket disconnect karein
+            
             if (socketRef.current) {
                 socketRef.current.disconnect();
             }
@@ -508,7 +504,7 @@ export default function VideoMeetComponents() {
             console.log("Error during call end:", e);
         }
 
-        // 4. Redirect to home
+       
         routeTo("/home");
     };
 

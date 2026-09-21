@@ -7,7 +7,6 @@ const withAuth = (WrappedComponent) => {
         const router = useNavigate();
 
         useEffect(() => {
-            // 👇 Yahan localStorage ko sessionStorage karein
             if (!sessionStorage.getItem("token")) {
                 router("/auth");
             }

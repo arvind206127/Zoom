@@ -44,23 +44,23 @@ const register = async (req, res) => {
     try {
         const existingUser = await User.findOne({ username });
         if (existingUser) {
-            return res.status(httpStatus.FOUND).json({ message: "Username already exists" });
+            // Fix: httpStatus.FOUND (302) ki jagah 409 (Conflict) ya 400 use karein
+            return res.status(httpStatus.CONFLICT).json({ message: "Username already exists" });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new User({
             name: name,
             username: username,
             password: hashedPassword
-        })
+        });
 
         await newUser.save();
         return res.status(httpStatus.CREATED).json({ message: "User registered successfully" });
 
-
     } catch (e) {
-        res.json({ message: `something went wrong: ${e}` })
+        return res.status(500).json({ message: `Something went wrong: ${e}` });
     }
 }
 

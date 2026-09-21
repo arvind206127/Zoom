@@ -21,7 +21,7 @@ function HomeComponent() {
         for (let i = 0; i < 5; i++) {
             result += chars.charAt(Math.floor(Math.random() * chars.length));
         }
-        return result; // जैसे "a4k9z"
+        return result; 
     }
 
 
@@ -36,7 +36,7 @@ function HomeComponent() {
 
     const handleCreateMeeting = async () => {
         const randomCode = generateRandomCode();
-        setMeetingCode(randomCode); // इनपुट बॉक्स में दिखा भी दो
+        setMeetingCode(randomCode); 
         await addToUserHistory(randomCode);
         navigate(`/${randomCode}`);
     }
